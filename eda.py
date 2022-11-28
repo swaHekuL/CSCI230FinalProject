@@ -42,7 +42,7 @@ def returnData():
    
    '''
    df['Years Out'] = 2022 - df['Class']
-   df['Spouse a Grad'] = df['Spouse a Grad'].replace(['Yes', np.NaN], [1,0])
+
    df = df.replace({'Spouse a Grad': {np.nan:0, 'Yes':1},
                     'Academic Activities': {np.nan:0, 'Yes':1},
                     'Academic Honors': {np.nan:0, 'Yes':1},
@@ -54,15 +54,25 @@ def returnData():
                     'Alumni Admissions Program': {np.nan:0, 'Yes':1},
                     'Alumni Board': {np.nan:0, 'Yes':1},
                     'Chapter Volunteers': {np.nan:0, 'Yes':1},
-                    'Reunion Class Committee': {np.nan:0, 'Yes':1}})
+                    'Reunion Class Committee': {np.nan:0, 'Yes':1},
+                    'Given': {'No':0, 'Yes':1}})
    
    
       
    X = df[['Years Out', 
            'Spouse a Grad',
-           ]]
+           'Academic Activities',
+           'Activities',
+           'Varsity Athletics',
+           'All American',
+           'Honor Societies',
+           'UG Academic Honors',
+           'Alumni Admissions Program',
+           'Alumni Board',
+           'Chapter Volunteers',
+           'Reunion Class Committee']]
   
-   y = df[[]]
+   y = df[['Given?']]
    
 # prepare data
    def fitData(df):
