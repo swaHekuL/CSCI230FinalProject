@@ -244,6 +244,7 @@ def returnData():
    #    print(item,'-', indDict[item])
    '''
    
+   
    X = df[['Years Out', 
            'Spouse a Grad',
            'Academic Activities',
@@ -275,30 +276,63 @@ def returnData():
            'Entertainment',
            'Other']]
   
-   returnCounts(X, X.columns)
+   #returnCounts(X, X.columns)
    
    y = df[['Given?']]
    
+   df = df[['Years Out', 
+           'Spouse a Grad',
+           'Academic Activities',
+           'Activities',
+           'Varsity Athletics',
+           'All American',
+           'Honor Societies',
+           'UG Academic Honors',
+           'Alumni Admissions Program',
+           'Alumni Board',
+           'Chapter Volunteers',
+           'Reunion Class Committee',
+           'Business',
+           'Arts',
+           'Humanities',
+           'SocialSciences',
+           'STEM', 
+           'OtherMajor',
+           'Legal_Services',
+           'Investments',
+           'Real_Estate',
+           'Education',
+           'Healthcare',
+           'Government',
+           'Retail',
+           'Public_Relations',
+           'Utilities',
+           'Tech',
+           'Entertainment',
+           'Other',
+           'Given?']]
    
-   
-# prepare data
-   def fitData(df,X):
+   # scale the data
+   sc = StandardScaler()
+   # sc = MinMaxScaler()    
+   # sc = MaxAbsScaler()
+   # sc = RobustScaler()
+   # sc = QuantileTransformer()
+   # sc = PowerTransformer()
+   # sc = Normalizer()
 
-      # scale the data
-      sc = StandardScaler()
+   sc.fit(X)
+   X = sc.transform(X)
+
+   return X, y
    
-      sc.fit(X)
-      X = sc.transform(X)
-   
-      return X, y
-      
 def plots(df):
    
    cols = df.columns.values
-   spm = pd.plotting.scatter_matrix(df, figsize = (14,14))
+   spm = pd.plotting.scatter_matrix(df, figsize = (30,30))
    
    cm = np.corrcoef(df[cols].values.T)
-   hm = heatmap(cm, row_names = cols, column_names = cols, figsize = (14,14))  
+   hm = heatmap(cm, row_names = cols, column_names = cols, figsize = (20,20))  
    
 def information(df):
    
@@ -319,4 +353,4 @@ def returnCounts(df, lst):
 if __name__ == "__main__":
    returnData()
    #plots(df)
-   information(df)
+   #information(df)
